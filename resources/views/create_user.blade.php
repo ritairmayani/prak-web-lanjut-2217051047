@@ -1,97 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Pendaftaran</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f0f5;
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            background-color: #f8bbd0; /* Latar belakang pink lembut */
         }
 
-        form {
-            background-color: #ffffff;
+        .form-container {
+            background-color: #fff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
+            width: 300px;
         }
 
-        label {
-            font-weight: bold;
+        .form-container label {
             display: block;
-            margin-bottom: 10px;
-            color: #333;
+            margin-bottom: 8px;
+            font-weight: bold;
         }
 
-        input[type="text"] {
+        .form-container input {
             width: 100%;
             padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            border: 1px solid #f48fb1; /* Warna pink menarik untuk input */
+            background-color: #fce4ec; /* Latar belakang input pink lembut */
             border-radius: 5px;
-            font-size: 16px;
+            color: #880e4f; /* Warna teks untuk kontras */
         }
 
-        input::placeholder {
-            color: #aaa;
-        }
-
-        button {
+        .form-container button {
             width: 100%;
-            background-color: #4CAF50;
+            padding: 10px;
+            background-color: #e91e63; /* Warna pink terang untuk tombol */
             color: white;
-            padding: 15px;
             border: none;
             border-radius: 5px;
             font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            font-weight: bold;
         }
 
-        button:hover {
-            background-color: #45a049;
-        }
-
-        input:focus {
-            border-color: #4CAF50;
-            outline: none;
-        }
-
-        @media (max-width: 600px) {
-            form {
-                padding: 15px;
-            }
-
-            button {
-                padding: 12px;
-            }
+        .form-container button:hover {
+            background-color: #d81b60;
         }
     </style>
 </head>
-
 <body>
-    <form action="{{ route('user.store') }}" method="POST">
-        @csrf
-        <label for="nama">Nama:</label>
-        <input type="text" id="nama" name="nama" placeholder="Masukkan Nama"><br>
+    <div class="form-container">
+        <form action="{{ route('user.store') }}" method="POST">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <label for="nama">Nama:</label>
+            <input type="text" id="nama" name="nama" value="">
+            @foreach($errors->get('nama') as $msg)
+            <p class="text-danger">{{ $msg }}</p>
 
-        <label for="npm">NPM : </label>
-        <input type="text" id="npm" name="npm" placeholder="Masukkan NPM"><br>
+            @endforeach
+            
+            <label for="npm">NPM:</label>
+            <input type="text" id="npm" name="npm" value="">
+            @foreach($errors->get('npm') as $msg)
+            <p class="text-danger">{{ $msg }}</p>
 
-        <label for="kelas">Kelas :</label>
-        <input type="text" id="kelas" name="kelas" placeholder="Masukkan Kelas"><br>
+            @endforeach
+            
+            <label for="kelas_id">Kelas:</label>
+            <select name="kelas_id" id="kelas_id" required>
+                @foreach($kelas as $kelasItem)
+                <option value="{{$kelasItem->id}}">{{$kelasItem->nama_kelas}}</option>
+                @endforeach
+    </select>
+    @foreach($errors->get('kelas_id') as $msg)
+            <p class="text-danger">{{ $msg }}</p>
 
-        <button type="submit">Submit</button>
-    </form>
+            @endforeach
+            
+            <button type="submit" value="Submit">Submit</button>
+        </form>
+    </div>
 </body>
-
 </html>

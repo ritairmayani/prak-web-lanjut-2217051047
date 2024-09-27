@@ -40,7 +40,7 @@
 
                 <div class="mt-6 text-xl font-semibold text-gray-900 dark:text-white flex justify-center">
                     <h1 style="font-size: 3rem;">Rita Irma Yani- 2217051047</h1>
-                </div>
+            </div>
 
                 <div class="mt-16">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">

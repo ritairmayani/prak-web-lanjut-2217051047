@@ -51,15 +51,16 @@
     <div class="profile-container">
         <img src="https://i.pinimg.com/564x/17/b8/83/17b883bf68cfd8f15b2fcfb57dc85ae0.jpg" alt="profile-image">
         <div class="info">
-            Nama: Rita Irma Yani
-        </div>
-        <div class="info">
-            Kelas: D
-        </div>
-        <div class="info">
-            NPM: 2217051047
-        </div>
+        <strong>Nama:</strong> {{ $nama }}
     </div>
+    <div class="info">
+        <strong>Kelas:</strong> {{ $nama_kelas ?? 'Kelas tidak ditemukan' }}
+    </div>
+    <div class="info">
+        <strong>NPM:</strong> {{ $npm }}
+    </div>
+</div>
+
 </body>
 
 </html>
