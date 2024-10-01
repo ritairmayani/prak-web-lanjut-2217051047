@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -54,38 +54,31 @@
             background-color: #d81b60;
         }
     </style>
-</head>
-<body>
-    <div class="form-container">
-        <form action="{{ route('user.store') }}" method="POST">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <label for="nama">Nama:</label>
-            <input type="text" id="nama" name="nama" value="">
-            @foreach($errors->get('nama') as $msg)
-            <p class="text-danger">{{ $msg }}</p>
+</head> -->
 
-            @endforeach
-            
-            <label for="npm">NPM:</label>
-            <input type="text" id="npm" name="npm" value="">
-            @foreach($errors->get('npm') as $msg)
-            <p class="text-danger">{{ $msg }}</p>
+        @extends('layouts.app')
+        @section('content')
+        <div>
+            <!-- Isi Section -->
+            <form action="{{ route('user.store') }}" method="POST">
+                 @csrf
+                <label for="nama">Nama:</label>
+                <input type="text" id="nama" name="nama"><br>
+        
+                <label for="npm">NPM : </label>
+                <input type="text" id="npm" name="npm"><br>
+       
+                <label for="kelas">Kelas :</label>
+                <select name="kelas_id" id="kelas_id">
+                    @foreach ($kelas as $kelasItem)
+                    <option value="{{ $kelasItem->id }}">{{ $kelasItem->nama_kelas }}</option>
+                    @endforeach
+                </select>
+        
+                <button type="submit">Submit</button>
+            </form>
+        
+        </div>
+        @endsection
 
-            @endforeach
-            
-            <label for="kelas_id">Kelas:</label>
-            <select name="kelas_id" id="kelas_id" required>
-                @foreach($kelas as $kelasItem)
-                <option value="{{$kelasItem->id}}">{{$kelasItem->nama_kelas}}</option>
-                @endforeach
-    </select>
-    @foreach($errors->get('kelas_id') as $msg)
-            <p class="text-danger">{{ $msg }}</p>
-
-            @endforeach
-            
-            <button type="submit" value="Submit">Submit</button>
-        </form>
-    </div>
-</body>
-</html>
+  
