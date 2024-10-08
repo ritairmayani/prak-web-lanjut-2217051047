@@ -44,8 +44,8 @@ class UserController extends Controller
     //     ]);
     // }
 
-    public function create(){
-        $kelasModel = new Kelas ();
+    public function create() {
+        $this->kelasModel = new Kelas();
 
         $kelas = $this->kelasModel->getKelas();
 
@@ -57,14 +57,47 @@ class UserController extends Controller
         return view('create_user', $data);
     }
 
-    public function store(Request $request) 
-    { 
-        $this->userModel->create([ 
-        'nama' => $request->input('nama'), 
-        'npm' => $request->input('npm'), 
-        'kelas_id' => $request->input('kelas_id'), 
-        ]); 
+    public function store(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'nama' => 'required',
+            'npm' => 'required',
+            'kelas_id' => 'required',
+            'foto' => 'image|file|max:2048', // Validasi foto
+        ]);
+
+        // Proses upload foto
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            // $file->storeAs('upload', $filname, 'public');
+            $file->move('img', $filename);
         
-        return redirect()->to('/user'); 
-    } 
+        // Menyimpan data ke database termasuk path foto
+        $this->userModel->create([
+        'nama' => $request->input('nama'),
+        'npm' => $request->input('npm'),
+        'kelas_id' => $request->input('kelas_id'),
+        'foto' => $filename, 
+        // Menyimpan path foto
+        ]);
+
+        
+    }
+    return redirect()->to('/user');
+
+}
+
+        public function show($id){
+            $user = $this->userModel->getUser($id);
+
+            $data = [
+                'title' => 'Profile',
+                'user' => $user,
+            ];
+
+            return view('profile', $data);
+    
+        }
 }
