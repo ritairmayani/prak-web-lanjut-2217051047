@@ -2,110 +2,151 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Pendaftaran</title>
+    <title>List User</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+     /* Umum untuk halaman */
+     body {
+        font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f8bbd0; /* Latar belakang pink lembut */
+            background-color:#f9c7ce; /* Latar belakang pink lembut */
         }
-
-        .form-container {
-            background-color: #fff;
+        form {
+            background: white;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 300px;
         }
-
-        .form-container label {
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             font-weight: bold;
         }
-
-        .form-container input {
+        input[type="text"],
+        input[type="submit"] {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #f48fb1; /* Warna pink menarik untuk input */
-            background-color: #fce4ec; /* Latar belakang input pink lembut */
-            border-radius: 5px;
-            color: #880e4f; /* Warna teks untuk kontras */
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
-
-        .form-container button {
-            width: 100%;
-            padding: 10px;
-            background-color: #e91e63; /* Warna pink terang untuk tombol */
+        input[type="submit"] {
+            background-color: #f48fb1;
             color: white;
             border: none;
-            border-radius: 5px;
-            font-size: 16px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #f48fb1;
+        }
+        h2, h1 {
+            text-align: center;
+            margin-bottom: 20px; 
+        }
+
+        /* Tabel */
+        table {
+            width: 100%;
+            max-width: 1000px;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: #fde3e3
+        }
+
+        th, td {
+            padding: 20px 35px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        thead th {
+            background-color: #d81b60;
+            color: white;
             font-weight: bold;
         }
 
-        .form-container button:hover {
-            background-color: #d81b60;
+        tbody tr:hover {
+            background-color:   #ffffff;
         }
 
-        body {
-    background-color: #f7d3e0; /* Softer pink background */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font style */
-}
+        .table-hover tbody tr:hover td {
+            background-color:  #aec1d3;
+        }
 
-table {
-    width: 70%; /* Increased table width */
-    margin: 50px auto; /* Center the table */
-    border-collapse: collapse; /* Merge borders */
-    border-radius: 10px; /* Rounded corners */
-    overflow: hidden; /* Ensures rounded corners are applied */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-}
+        /* Gaya gambar pengguna */
+        .foto-user {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 5px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        }
 
-th, td {
-    padding: 15px 20px; /* Enhanced cell padding */
-    text-align: left; /* Text alignment */
-    border-bottom: 2px solid #f2a6d0; /* Bottom border for cells */
-}
+        /* Tombol aksi */
+        .btn {
+            margin: 2px;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            cursor: pointer;
+        }
 
-th {
-    background-color: #f78da7; /* Header background color */
-    color: white; /* Header text color */
-    font-size: 1.2em; /* Larger font size for header */
-    letter-spacing: 1px; /* Spacing between letters */
-}
+        .btn-add {
+            background-color: #007bff;
+            
+        }
 
-tr:nth-child(even) {
-    background-color: #f9e4f0; /* Light background for even rows */
-}
+        .btn-add:hover {
+            background-color: #0069d9;
+        }
 
-tr:hover {
-    background-color: #f5a6c4; /* Row hover color */
-    transition: background-color 0.3s ease; /* Smooth transition */
-}
+        /* Warna tombol aksi */
+        .btn-edit {
+            background-color: #007bff;
+        }
 
-caption {
-    font-size: 1.5em; /* Caption font size */
-    margin: 10px; /* Margin around caption */
-    color: #d54e6d; /* Caption text color */
-}
+        .btn-edit:hover {
+            background-color: #0069d9;
+        }
 
-@media (max-width: 768px) {
-    table {
-        width: 90%; /* Responsive design for smaller screens */
-    }
+        .btn-detail {
+            background-color: #ffc107;
+        }
 
-    th, td {
-        padding: 10px; /* Adjust padding for smaller screens */
-        font-size: 0.9em; /* Smaller font size */
-    }
-}
+        .btn-detail:hover {
+            background-color: #e0a800;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333;
+        }
+
+        /* Kontainer dan tata letak */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .mb-3 {
+            margin-bottom: 15px;
+        }
+
 
 
     </style>
@@ -114,6 +155,5 @@ caption {
     @yield('content')
 
     <script src="..."></script>
-    
 </body>
 </html>
