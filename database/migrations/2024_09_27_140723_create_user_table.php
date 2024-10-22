@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user', function (Blueprint $table) {
+        // Buat tabel 'users' dengan kolom yang sesuai
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
             $table->string('npm');
-            $table->foreignId('kelas_id')->constrained();
+            $table->foreignId('kelas_id')->constrained(); // Foreign key ke tabel 'kelas'
+            $table->string('jurusan'); // Kolom 'jurusan' ditambahkan di sini
+            $table->integer('semester'); // Kolom 'semester' ditambahkan di sini
             $table->timestamps();
         });
     }
@@ -25,6 +28,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user');
+        // Hapus tabel 'users' jika rollback dilakukan
+        Schema::dropIfExists('users');
     }
 };
