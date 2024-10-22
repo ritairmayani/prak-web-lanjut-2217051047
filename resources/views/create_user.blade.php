@@ -1,84 +1,68 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Pendaftaran</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f8bbd0; /* Latar belakang pink lembut */
-        }
+@extends('layouts.app')
+@section('content')
 
-        .form-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 300px;
-        }
+<div>
+    <div class="mb-3 mt-2 m-3">
+        <a href="{{ route('user.list') }}" class="btn btn-success">List User</a>
+    </div>
+    <form class ="input" action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
 
-        .form-container label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
+        <div class="container mt-5">
+            <h1 class="text-center">Input Data</h1>
+            <div class="mb-3">
+                <label for="nama">Nama :</label>
+                <input type="text" id="nama" name="nama" value="{{ old('nama') }}"><br>
+                @error('nama')
+                    <div style="color: red;">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
 
-        .form-container input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #f48fb1; /* Warna pink menarik untuk input */
-            background-color: #fce4ec; /* Latar belakang input pink lembut */
-            border-radius: 5px;
-            color: #880e4f; /* Warna teks untuk kontras */
-        }
-
-        .form-container button {
-            width: 100%;
-            padding: 10px;
-            background-color: #e91e63; /* Warna pink terang untuk tombol */
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        .form-container button:hover {
-            background-color: #d81b60;
-        }
-    </style>
-</head> -->
-
-        @extends('layouts.app')
-        @section('content')
-        <div>
-            <!-- Isi Section -->
-            <form action="{{ route('user.store') }}" method="POST">
-                 @csrf
-                <label for="nama">Nama:</label>
-                <input type="text" id="nama" name="nama"><br>
-        
-                <label for="npm">NPM : </label>
-                <input type="text" id="npm" name="npm"><br>
-       
+            <div class="mb-3">
+                <label for="npm">NPM :</label>
+                <input type="text" id="npm" name="npm" value="{{ old('npm') }}"><br>
+                @error('npm')
+                    <div style="color: red;">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div>
                 <label for="kelas">Kelas :</label>
                 <select name="kelas_id" id="kelas_id">
                     @foreach ($kelas as $kelasItem)
-                    <option value="{{ $kelasItem->id }}">{{ $kelasItem->nama_kelas }}</option>
+                        <option value="{{ $kelasItem->id }}" {{ old('kelas_id') == $kelasItem->id ? 'selected' : '' }}>
+                            {{ $kelasItem->nama_kelas }}
+                        </option>
                     @endforeach
-                </select>
-        
-                <button type="submit">Submit</button>
-            </form>
-        
-        </div>
-        @endsection
+                </select><br>
+                @error('kelas_id')
+                    <div style="color: red;">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
 
-  
+            <div>
+                <label for="foto" class="form-label">Foto</label>
+                <input type="file" id="foto" name="foto"><br><br>
+            </div>
+
+            <div class="mb-3">
+                <label for="jurusan">Jurusan :</label>
+                <input type="text" id="jurusan" name="jurusan" value="{{ old('jurusan') }}"><br>
+            </div>
+
+            <div class="mb-3">
+                <label for="semester">Semester :</label>
+                <input type="text" id="semester" name="semester" value="{{ old('semester') }}"><br>
+            </div>
+
+            <button type="submit" class="btn btn-success ">Submit</button>
+        </div>
+    </form>
+</div>
+
+@endsection
